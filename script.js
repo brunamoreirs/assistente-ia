@@ -66,8 +66,10 @@ btnPergunta.addEventListener('click', async () => {
     const resposta = await fetchIA(pergunta, apiKey, modelo);
     respostaDiv.textContent = resposta;
     respContent.classList.remove('hidden');
+
     salvarHistorico(pergunta, resposta);
     renderHistorico();
+
   } catch (erro) {
     error.textContent = `Erro: ${erro.message}`;
   } finally {
@@ -79,6 +81,7 @@ btnPergunta.addEventListener('click', async () => {
 //salvar no histórico
 salvarHistorico(pergunta, resposta);
     renderHistorico();
+
 
 //função para Gemini
 async function fetchGemini(pergunta, apiKey) {
@@ -141,13 +144,20 @@ function renderHistorico() {
   if (!historyList) return;
   historyList.innerHTML = "";
   let historico = JSON.parse(localStorage.getItem("historico") || "[]");
+
   historico.forEach(item => {
-    const li = document.createElement("li");
-    li.innerHTML = `<strong>P:</strong> ${item.pergunta}<br>
-                    <strong>R:</strong> ${item.resposta}`;
-    historyList.appendChild(li);
+    const div = document.createElement("div");
+    div.classList.add("history-item");
+
+    div.innerHTML = `
+      <p><strong>Pergunta:</strong> ${item.pergunta}</p>
+      <p><strong>Resposta:</strong> ${item.resposta}</p>
+    `;
+
+    historyList.appendChild(div);
   });
 }
+
 renderHistorico();
 
 //copiar resposta
