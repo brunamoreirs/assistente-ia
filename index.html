@@ -28,8 +28,8 @@
         <option value="gpt-4-turbo">GPT-4 Turbo</option>
         <option value="gpt-4o">GPT-4o (Omni)</option>
       </select>
-      <textarea id="userInput" rows="4" placeholder="Digite sua pergunta..."></textarea>
-      <div class="buttons">
+      <textarea id="userInput" rows="4" maxlength="500" placeholder="Digite sua pergunta..."></textarea>
+      <small id="charCount">0 / 500</small>
         <button id="btnPergunta" class="btn primary">Perguntar</button>
         <button id="btnLimpa" class="btn secondary">Limpar</button>
       </div>
@@ -42,7 +42,8 @@
         <div></div>
         <div></div>
       </div>
-      <div id="resposta"></div> 
+      <div id="resposta" class="resposta-box"></div>
+      <button id="copyBtn" class="btn-copy">Copiar</button>
     </section>
     
     <section id="error" class="card hidden error"></section>

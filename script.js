@@ -169,9 +169,12 @@ renderHistorico();
 // copiar resposta
 if (copyBtn) {
   copyBtn.addEventListener('click', () => {
-    const texto = respostaDiv.textContent;
+    const texto = respostaDiv.innerText;
     if (texto) {
-      navigator.clipboard.writeText(texto);
+      navigator.clipboard.writeText(texto).then(() => {
+        copyBtn.textContent = "✅ Copiado!";
+        setTimeout(() => copyBtn.textContent = "Copiar", 2000);
+      });
     }
   });
 }
